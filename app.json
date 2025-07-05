@@ -33,10 +33,25 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "react-native-permissions",
+        {
+          "permissions": [
+            "CAMERA",
+            "RECORD_AUDIO"
+          ]
+        }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "b75ca836-3488-4d5a-9cab-bd4764ec863c"
+      }
     }
   }
 }
