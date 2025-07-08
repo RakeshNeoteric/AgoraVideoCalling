@@ -9,10 +9,16 @@ import {
   RenderModeType
 } from 'react-native-agora';
 
-import { AGORA_APP_ID, AGORA_CHANNEL_NAME } from '../constants/Config';
+import { AGORA_APP_ID } from '../constants/Config';
 import { requestCameraAndAudioPermissions } from '../utils/permissions';
 
-const VideoCall = () => {
+// ✅ Accept Props (channelName and onEnd)
+type VideoCallProps = {
+  channelName: string;
+  onEnd: () => void;
+};
+
+const VideoCall: React.FC<VideoCallProps> = ({ channelName, onEnd }) => {
   const [joined, setJoined] = useState(false);
   const [engine] = useState<IRtcEngine>(() => createAgoraRtcEngine());
 
@@ -52,7 +58,7 @@ const VideoCall = () => {
 
   const startCall = async () => {
     try {
-      engine.joinChannel('', AGORA_CHANNEL_NAME, 0, {});
+      engine.joinChannel('', channelName, 0, {});
     } catch (err: any) {
       Alert.alert('Failed to join call', err?.message || JSON.stringify(err));
     }
@@ -62,6 +68,7 @@ const VideoCall = () => {
     try {
       engine.leaveChannel();
       setJoined(false);
+      onEnd();  // ✅ Call onEnd callback
     } catch (err) {
       console.error('Leave Channel Error:', err);
     }

@@ -1,0 +1,52 @@
+# Node modules (excluded by default, but adding for clarity)
+node_modules/
+
+# Build output directories (Android/iOS)
+android/app/build/
+android/build/
+ios/build/
+ios/Pods/
+build/
+dist/
+
+# Expo local folders
+.expo/
+.expo-shared/
+
+# IDE/editor settings
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# APK, AAB, IPA files (app binaries)
+*.apk
+*.aab
+*.ipa
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Git repository (optional but not needed for builds)
+.git/
+.gitignore
+
+# Test coverage and results (if any)
+coverage/
+test-results/
+
+# Secrets and environment files (optional, be careful!)
+.env
+.env.*
+*.jks
+*.keystore
+*.p12
+
+# Temporary files
+tmp/
+temp/
