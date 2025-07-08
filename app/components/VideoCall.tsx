@@ -12,10 +12,10 @@ import {
 import { AGORA_APP_ID } from '../constants/Config';
 import { requestCameraAndAudioPermissions } from '../utils/permissions';
 
-// ✅ Accept Props (channelName and onEnd)
 type VideoCallProps = {
   channelName: string;
   onEnd: () => void;
+  
 };
 
 const VideoCall: React.FC<VideoCallProps> = ({ channelName, onEnd }) => {
@@ -34,7 +34,7 @@ const VideoCall: React.FC<VideoCallProps> = ({ channelName, onEnd }) => {
 
         engine.registerEventHandler({
           onJoinChannelSuccess: () => {
-            console.log('Successfully joined the channel');
+            console.log('✅ Successfully joined the channel:', channelName);
             setJoined(true);
           },
           onError: (err) => {
@@ -57,7 +57,9 @@ const VideoCall: React.FC<VideoCallProps> = ({ channelName, onEnd }) => {
   }, [engine]);
 
   const startCall = async () => {
+    console.log('➡️ Attempting to join channel:', channelName);
     try {
+      // ✅ FIX: Use `null` for token instead of empty string ''
       engine.joinChannel('', channelName, 0, {});
     } catch (err: any) {
       Alert.alert('Failed to join call', err?.message || JSON.stringify(err));
@@ -68,7 +70,7 @@ const VideoCall: React.FC<VideoCallProps> = ({ channelName, onEnd }) => {
     try {
       engine.leaveChannel();
       setJoined(false);
-      onEnd();  // ✅ Call onEnd callback
+      onEnd();
     } catch (err) {
       console.error('Leave Channel Error:', err);
     }

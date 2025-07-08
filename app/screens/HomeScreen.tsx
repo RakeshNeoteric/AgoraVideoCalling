@@ -17,6 +17,7 @@ const HomeScreen = ({ userId }: { userId: string }) => {
 
   const handleAccept = async () => {
     if (incomingCall) {
+       console.log('Accepting call with channel:', incomingCall.channelName);
       await updateCallStatus(incomingCall.id, 'IN_CALL');
       setCurrentChannel(incomingCall.channelName);
       setInCall(true);
@@ -33,6 +34,7 @@ const HomeScreen = ({ userId }: { userId: string }) => {
 
   const handleStartCall = async () => {
     const channel = `channel-${Date.now()}`;
+     console.log('Starting Call with channel:', channel);
     await requestCall(userId, 'userB', channel);  // 👈 Adjust this as needed
     setCurrentChannel(channel);
     setInCall(true);
